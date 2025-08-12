@@ -1,5 +1,5 @@
 # ---- 1) Build stage: compile wheels so the final image doesn't need build tools
-FROM python:3.12-slim AS builder
+FROM python:3.10-slim AS builder
 
 ENV PIP_NO_CACHE_DIR=1 \
     PYTHONDONTWRITEBYTECODE=1 \
@@ -18,7 +18,7 @@ RUN python -m pip install --upgrade pip setuptools wheel && \
     pip wheel --no-deps --wheel-dir /wheels -r requirements.txt
 
 # ---- 2) Runtime stage: minimal, no compilers/tools
-FROM python:3.12-slim AS runtime
+FROM python:3.10-slim AS runtime
 
 ENV PIP_NO_CACHE_DIR=1 \
     PYTHONDONTWRITEBYTECODE=1 \
